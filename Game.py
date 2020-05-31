@@ -67,6 +67,11 @@ birdrect5 = bird5.get_rect()
 birdrect5.x = random.randint(50, 750)
 birdrect5.y = random.randint(50, 500)
 
+text2 = font2.render("Press Esc to Close the Game", True, white)
+text2rect = text2.get_rect()
+text2rect.center = (115, 25)
+gameDisplay.blit(text2, text2rect)
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -94,28 +99,28 @@ while running:
     if circlerect.colliderect (birdrect):
         score += 1
         dead = False
-        birdrect.center = 2000, 2000
+        birdrect.x = random.randint(50, 750)
+        birdrect.y = random.randint(50, 500)
     if circlerect.colliderect (birdrect2):
         dead2 = False
         score += 1
-        birdrect2.center = 2000, 2000
+        birdrect2.x = random.randint(50, 750)
+        birdrect2.y = random.randint(50, 500)
     if circlerect.colliderect (birdrect3):
         score += 1
         dead3 = False
-        birdrect3.center = 2000, 2000
+        birdrect3.x = random.randint(50, 750)
+        birdrect3.y = random.randint(50, 500)
     if circlerect.colliderect (birdrect4):
         score += 1
         dead4 = False
-        birdrect4.center = 2000, 2000
+        birdrect4.x = random.randint(50, 750)
+        birdrect4.y = random.randint(50, 500)
     if circlerect.colliderect (birdrect5):
         score += 1
         dead5 = False
-        birdrect5.center = 2000, 2000
-
-    text2 = font2.render("Press Esc to Close the Game", True, white)
-    text2rect = text2.get_rect()
-    text2rect.center = (115, 25)
-    gameDisplay.blit(text2, text2rect)
+        birdrect5.x = random.randint(50, 750)
+        birdrect5.y = random.randint(50, 500)
 
     if opening:
         text = font.render("Many Birds,", True, white)
@@ -175,21 +180,27 @@ while running:
     if end:
         gameDisplay.fill(black)
 
-        if score == 5:
-            text3 = font3.render("Outstanding!", True, white)
-            text = font3.render(" You got all the birds!", True, white)
-            textRect = text.get_rect()
-            textRect.center = (400, 275)
-        else:
-            text = font.render(str(score), True, white)
-            textRect = text.get_rect()
-            textRect.center = (400, 375)
-            text3 = font3.render("Your Score Was:", True, white)
+        text = font.render(str(score), True, white)
+        textRect = text.get_rect()
+        textRect.center = (400, 375)
+        text3 = font3.render("Your Score Was:", True, white)
 
+        text4 = font4.render("Press ENTER to Play Again", True, white)
+        text4rect = text4.get_rect()
+        text4rect.center = (400, 800)
         text3rect = text3.get_rect()
         text3rect.center = (400, 200)
+        gameDisplay.blit(text4, text4rect)
         gameDisplay.blit(text3, text3rect)
         gameDisplay.blit(text, textRect)
+
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    end = False
+                    playing = True
+                    score = 0
+
 
     pygame.display.update()
     clock.tick(60)
